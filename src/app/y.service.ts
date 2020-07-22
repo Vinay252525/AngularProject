@@ -4,12 +4,25 @@ import {HttpClient} from '@angular/common/http'
   providedIn: 'root'
 })
 export class YService {
-  private _url:string="https://api.github.com/search/users?q=";
-  constructor(private http:HttpClient) { }
-  searchUser1(value:string, direc:boolean){
-    if(direc==true)
-    return this.http.get(this._url+value+"&sort=order&direction=desc");
+public val="";
+  constructor(public http:HttpClient) { }
+getData(users:String)
+{
+ 
 
-    return this.http.get(this._url+value+"&sort=order&direction=asc");
-  }
+  return this.http.get("https://api.github.com/search/users?q="+users);
+}
+ hightolow(){
+  return this.http.get("https://api.github.com/search/users?q="+this.val+'&sort=score&direction=desc');
+
+}
+lowtohigh(){
+  return this.http.get("https://api.github.com/search/users?q="+this.val+'&sort=score&direction=asc');
+
+}
+getSecondApi(user : String)
+{
+  return this.http.get("https://api.github.com/users/"+user);
+}
+
 }
